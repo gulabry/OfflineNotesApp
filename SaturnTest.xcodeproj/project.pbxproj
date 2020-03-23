@@ -3,27 +3,53 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47ED715FFB32F47E6A9D2F79 /* Pods_SaturnTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C64D0A8513859A08D5B1B40 /* Pods_SaturnTest.framework */; };
+		C22161FD24271F9500886AF1 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22161FC24271F9500886AF1 /* ApplicationManager.swift */; };
+		C22162002427FE3D00886AF1 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22161FF2427FE3D00886AF1 /* BaseNavigationController.swift */; };
+		C22162022427FE5600886AF1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22162012427FE5600886AF1 /* BaseViewController.swift */; };
+		C22162052427FF4900886AF1 /* OfflineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22162042427FF4900886AF1 /* OfflineManager.swift */; };
+		C221620A2428111600886AF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C22162092428111600886AF1 /* LaunchScreen.storyboard */; };
+		C221620C242811D900886AF1 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C221620B242811D900886AF1 /* NotesViewController.swift */; };
+		C239B239242813500012488F /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B238242813500012488F /* NoteTableViewCell.swift */; };
+		C239B23C242816130012488F /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B23B242816130012488F /* NSLayoutConstraint+Extension.swift */; };
+		C239B23F24281C330012488F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B23E24281C330012488F /* Note.swift */; };
+		C239B2412428215C0012488F /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B2402428215C0012488F /* Tuple.swift */; };
+		C239B24424282A030012488F /* NotesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24324282A030012488F /* NotesDataSource.swift */; };
+		C239B246242832910012488F /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B245242832910012488F /* NotesViewModel.swift */; };
+		C239B24824283E620012488F /* NotesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24724283E620012488F /* NotesManager.swift */; };
+		C239B24A24284EF10012488F /* NoteCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24924284EF10012488F /* NoteCreationViewController.swift */; };
 		C289B8D9242709E1003E8040 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C289B8D8242709E1003E8040 /* AppDelegate.swift */; };
 		C289B8DB242709E1003E8040 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C289B8DA242709E1003E8040 /* SceneDelegate.swift */; };
-		C289B8DD242709E1003E8040 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C289B8DC242709E1003E8040 /* ViewController.swift */; };
-		C289B8E0242709E1003E8040 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C289B8DE242709E1003E8040 /* Main.storyboard */; };
 		C289B8E2242709E4003E8040 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C289B8E1242709E4003E8040 /* Assets.xcassets */; };
-		C289B8E5242709E4003E8040 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C289B8E3242709E4003E8040 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C64D0A8513859A08D5B1B40 /* Pods_SaturnTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SaturnTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F522B9E957C07EEF30D8AA7 /* Pods-SaturnTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaturnTest.release.xcconfig"; path = "Target Support Files/Pods-SaturnTest/Pods-SaturnTest.release.xcconfig"; sourceTree = "<group>"; };
+		C22161FC24271F9500886AF1 /* ApplicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
+		C22161FF2427FE3D00886AF1 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		C22162012427FE5600886AF1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		C22162042427FF4900886AF1 /* OfflineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineManager.swift; sourceTree = "<group>"; };
+		C22162092428111600886AF1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C221620B242811D900886AF1 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		C239B238242813500012488F /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		C239B23B242816130012488F /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
+		C239B23E24281C330012488F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		C239B2402428215C0012488F /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		C239B24324282A030012488F /* NotesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDataSource.swift; sourceTree = "<group>"; };
+		C239B245242832910012488F /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
+		C239B24724283E620012488F /* NotesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesManager.swift; sourceTree = "<group>"; };
+		C239B24924284EF10012488F /* NoteCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreationViewController.swift; sourceTree = "<group>"; };
 		C289B8D5242709E1003E8040 /* SaturnTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaturnTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C289B8D8242709E1003E8040 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C289B8DA242709E1003E8040 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C289B8DC242709E1003E8040 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C289B8DF242709E1003E8040 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C289B8E1242709E4003E8040 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C289B8E4242709E4003E8040 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C289B8E6242709E4003E8040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4EDC4917DD132C99ECF56C8 /* Pods-SaturnTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaturnTest.debug.xcconfig"; path = "Target Support Files/Pods-SaturnTest/Pods-SaturnTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +57,116 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47ED715FFB32F47E6A9D2F79 /* Pods_SaturnTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		005BD30029B8E329D213D362 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E4EDC4917DD132C99ECF56C8 /* Pods-SaturnTest.debug.xcconfig */,
+				9F522B9E957C07EEF30D8AA7 /* Pods-SaturnTest.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		83F0F3B0EE6671F4C9BC8AD8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C64D0A8513859A08D5B1B40 /* Pods_SaturnTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C22161FE2427254000886AF1 /* BaseControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C22161FF2427FE3D00886AF1 /* BaseNavigationController.swift */,
+				C22162012427FE5600886AF1 /* BaseViewController.swift */,
+			);
+			path = BaseControllers;
+			sourceTree = "<group>";
+		};
+		C22162032427FF3D00886AF1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C22161FC24271F9500886AF1 /* ApplicationManager.swift */,
+				C22162042427FF4900886AF1 /* OfflineManager.swift */,
+				C239B24724283E620012488F /* NotesManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		C2216208242810B200886AF1 /* ApplicationDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				C289B8D8242709E1003E8040 /* AppDelegate.swift */,
+				C289B8DA242709E1003E8040 /* SceneDelegate.swift */,
+			);
+			path = ApplicationDelegates;
+			sourceTree = "<group>";
+		};
+		C221620D242811E300886AF1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C22161FE2427254000886AF1 /* BaseControllers */,
+				C221620B242811D900886AF1 /* NotesViewController.swift */,
+				C239B24924284EF10012488F /* NoteCreationViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C239B236242813280012488F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C239B238242813500012488F /* NoteTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C239B237242813320012488F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C239B245242832910012488F /* NotesViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C239B23A242815F20012488F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C239B23B242816130012488F /* NSLayoutConstraint+Extension.swift */,
+				C239B2402428215C0012488F /* Tuple.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C239B23D24281C260012488F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C239B23E24281C330012488F /* Note.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C239B242242829EC0012488F /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				C239B24324282A030012488F /* NotesDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
 		C289B8CC242709E1003E8040 = {
 			isa = PBXGroup;
 			children = (
 				C289B8D7242709E1003E8040 /* SaturnTest */,
 				C289B8D6242709E1003E8040 /* Products */,
+				005BD30029B8E329D213D362 /* Pods */,
+				83F0F3B0EE6671F4C9BC8AD8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,13 +181,17 @@
 		C289B8D7242709E1003E8040 /* SaturnTest */ = {
 			isa = PBXGroup;
 			children = (
-				C289B8D8242709E1003E8040 /* AppDelegate.swift */,
-				C289B8DA242709E1003E8040 /* SceneDelegate.swift */,
-				C289B8DC242709E1003E8040 /* ViewController.swift */,
-				C289B8DE242709E1003E8040 /* Main.storyboard */,
-				C289B8E1242709E4003E8040 /* Assets.xcassets */,
-				C289B8E3242709E4003E8040 /* LaunchScreen.storyboard */,
+				C2216208242810B200886AF1 /* ApplicationDelegates */,
+				C22162032427FF3D00886AF1 /* Managers */,
+				C221620D242811E300886AF1 /* Controllers */,
+				C239B242242829EC0012488F /* DataSources */,
+				C239B236242813280012488F /* View */,
+				C239B23A242815F20012488F /* Helpers */,
+				C239B23D24281C260012488F /* Models */,
+				C239B237242813320012488F /* ViewModels */,
 				C289B8E6242709E4003E8040 /* Info.plist */,
+				C289B8E1242709E4003E8040 /* Assets.xcassets */,
+				C22162092428111600886AF1 /* LaunchScreen.storyboard */,
 			);
 			path = SaturnTest;
 			sourceTree = "<group>";
@@ -74,9 +203,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C289B8E9242709E4003E8040 /* Build configuration list for PBXNativeTarget "SaturnTest" */;
 			buildPhases = (
+				27FB60C50AFD190F5813531F /* [CP] Check Pods Manifest.lock */,
 				C289B8D1242709E1003E8040 /* Sources */,
 				C289B8D2242709E1003E8040 /* Frameworks */,
 				C289B8D3242709E1003E8040 /* Resources */,
+				FC482D5BCA62763551CA6E8B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,45 +256,79 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C289B8E5242709E4003E8040 /* LaunchScreen.storyboard in Resources */,
 				C289B8E2242709E4003E8040 /* Assets.xcassets in Resources */,
-				C289B8E0242709E1003E8040 /* Main.storyboard in Resources */,
+				C221620A2428111600886AF1 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		27FB60C50AFD190F5813531F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SaturnTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC482D5BCA62763551CA6E8B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SaturnTest/Pods-SaturnTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SaturnTest/Pods-SaturnTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SaturnTest/Pods-SaturnTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C289B8D1242709E1003E8040 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C289B8DD242709E1003E8040 /* ViewController.swift in Sources */,
 				C289B8D9242709E1003E8040 /* AppDelegate.swift in Sources */,
+				C22161FD24271F9500886AF1 /* ApplicationManager.swift in Sources */,
+				C22162002427FE3D00886AF1 /* BaseNavigationController.swift in Sources */,
+				C239B24824283E620012488F /* NotesManager.swift in Sources */,
+				C239B246242832910012488F /* NotesViewModel.swift in Sources */,
+				C239B23C242816130012488F /* NSLayoutConstraint+Extension.swift in Sources */,
+				C239B239242813500012488F /* NoteTableViewCell.swift in Sources */,
+				C239B23F24281C330012488F /* Note.swift in Sources */,
+				C239B2412428215C0012488F /* Tuple.swift in Sources */,
+				C221620C242811D900886AF1 /* NotesViewController.swift in Sources */,
+				C239B24424282A030012488F /* NotesDataSource.swift in Sources */,
+				C22162052427FF4900886AF1 /* OfflineManager.swift in Sources */,
 				C289B8DB242709E1003E8040 /* SceneDelegate.swift in Sources */,
+				C239B24A24284EF10012488F /* NoteCreationViewController.swift in Sources */,
+				C22162022427FE5600886AF1 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		C289B8DE242709E1003E8040 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C289B8DF242709E1003E8040 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C289B8E3242709E4003E8040 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C289B8E4242709E4003E8040 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C289B8E7242709E4003E8040 /* Debug */ = {
@@ -282,6 +447,7 @@
 		};
 		C289B8EA242709E4003E8040 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4EDC4917DD132C99ECF56C8 /* Pods-SaturnTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +466,7 @@
 		};
 		C289B8EB242709E4003E8040 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F522B9E957C07EEF30D8AA7 /* Pods-SaturnTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

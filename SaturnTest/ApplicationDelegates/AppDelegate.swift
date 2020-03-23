@@ -10,11 +10,22 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
+    var window: UIWindow?
+    
+    lazy var applicationManager: ApplicationManager? = {
+        if #available(iOS 13, *) {
+            guard let sd = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate) else { return nil }
+            return sd.applicationManager
+        } else {
+            guard let window = window else { return nil }
+            return ApplicationManager(window: window)
+        }
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         return true
     }
 
@@ -31,7 +42,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 
