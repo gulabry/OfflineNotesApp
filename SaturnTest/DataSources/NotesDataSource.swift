@@ -17,6 +17,14 @@ public class NotesDataSource: NSObject, UITableViewDataSource {
         self.notes = notes
     }
     
+    public func update(_ notes: [Note]) {
+        self.notes = notes
+    }
+    
+    public func add(_ note: Note) {
+        self.notes.insert(note, at: 0)
+    }
+    
     public func note(for indexPath: IndexPath) -> Note {
         return notes[indexPath.row]
     }

@@ -11,6 +11,8 @@ import RealmSwift
 
 public class Note: Object {
     @objc dynamic var id = ""
+    @objc dynamic var localId = ""
+    @objc dynamic var imageId = ""
+    @objc dynamic var imageLocalId = ""
     @objc dynamic var body = ""
-    @objc dynamic var imageURL = ""
 }

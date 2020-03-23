@@ -8,19 +8,21 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 public protocol NoteCreationDelegate: NSObject {
-    func save(note: Note, imageData: Data)
+    func save(note: Note, image: UIImage)
 }
 
 public final class NotesViewController: BaseController {
     
     private var tableView: UITableView
-    private var dataSource: NotesDataSource = .init(notes: NotesDataSource.mockData())
+    private var dataSource: NotesDataSource
     private var notesManager: NotesManager
         
     init(manager: NotesManager) {
         notesManager = manager
+        dataSource = .init(notes: manager.notes)
         tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: NoteTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
@@ -66,9 +68,26 @@ extension NotesViewController: UITableViewDelegate {
 }
 
 extension NotesViewController: NoteCreationDelegate {
-    public func save(note: Note, imageData: Data) {
+    public func save(note: Note, image: UIImage) {
         //  add note locally
+        
+        notesManager.save(note: note, image: image)
+        
+        Threading.main {
+            self.dataSource.add(note)
+            self.tableView.reloadData()
+        }
         //  update view to show loading
-        notesManager.save(note: note, imageData: imageData)
+        //  reload and show spinner
+    }
+}
+
+extension NotesViewController: NotesManagerDelegate {
+    
+    public func notesDidUpdate(notes: [Note]) {
+        Threading.main {
+            self.dataSource.update(notes)
+            self.tableView.reloadData()
+        }
     }
 }

@@ -8,32 +8,45 @@
 
 import Foundation
 import Alamofire
+import SDWebImage
+import RealmSwift
 
-enum NetworkStatus {
-    case online
-    case offline
-}
-
-protocol NotesManagerDelegate: NSObject {
-    func updated(notes: [Note])
+public protocol NotesManagerDelegate: NSObject {
+    func notesDidUpdate(notes: [Note])
 }
 
 public final class NotesManager {
     
     private let offlineManager = OfflineManager()
-    
-    private let manager = NetworkReachabilityManager(host: "www.google.com")
+    public weak var delegate: NotesManagerDelegate?
+
+    //  source of truth (TM)
+    //
+    internal var notes: [Note]
     
     public init() {
-        
-        manager?.startListening { [weak self] status in
-            print("Network Status Changed: \(status)")
-        }
+        notes = offlineManager.loadSavedNotes()
     }
     
-    public func save(note: Note, imageData: Data) {
+    //  the modals will indicated if they are saved locally or not
+    //  note.id = saved remotely
+    //  note.localId = saved locally
+    //  note.imageId = saved remotely
+    //  note.imageLocalId = saved locally
+    //
+    public func save(note: Note, image: UIImage) {
         print("save note")
         
+        offlineManager.addLocal(note: note, image: image) { [weak self] isSavedLocally in
+            if isSavedLocally {
+                // start online upload
+                print("saved locally")
+                //self?.delegate?.noteLocallyAdded(note: note)
+                
+            } else {
+                // add id to failed queue.. local
+            }
+        }
         // save image locally
         // save note localling with imageURL
         

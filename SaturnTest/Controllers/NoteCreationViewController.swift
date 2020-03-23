@@ -14,7 +14,7 @@ public class NoteCreationViewController: BaseController {
     var imageView: UIImageView
     var selectImageButton: UIButton
     
-    var imageData: Data?
+    var image: UIImage?
     var noteBody: String?
     
     weak var delegate: NoteCreationDelegate?
@@ -78,7 +78,7 @@ public class NoteCreationViewController: BaseController {
         
         noteBody = textView.text
         
-        guard let imageData = imageData,
+        guard let image = image,
             let body = noteBody,
             body.count > 0 else {
             showErrorAlert()
@@ -87,8 +87,10 @@ public class NoteCreationViewController: BaseController {
         
         let note = Note()
         note.body = body
+        note.localId = UUID().uuidString
+        note.imageLocalId = note.localId
         
-        delegate?.save(note: note, imageData: imageData)
+        delegate?.save(note: note, image: image)
         dismiss(animated: true, completion: nil)
     }
     
@@ -128,7 +130,7 @@ extension NoteCreationViewController: UIImagePickerControllerDelegate {
         }
         
         self.imageView.image = image
+        self.image = image
         picker.dismiss(animated: true, completion: nil)
-        imageData = image.jpegData(compressionQuality: 0.4)
     }
 }

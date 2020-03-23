@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class NoteTableViewCell: UITableViewCell {
     
@@ -28,12 +29,27 @@ class NoteTableViewCell: UITableViewCell {
     
     public func setup(with note: Note) {
         titleLabel.text = note.body
+        
+        //  will load image from local id (as it's saved there first)
+        //  however if it was added in the DB, the local ID will be empty so it will load from the remote image ID
+        //
+        noteImageView.image = SDImageCache.shared.imageFromCache(forKey: note.imageLocalId.isEmpty ? note.imageId : note.imageLocalId)
+        
+        if note.id.isEmpty {
+            statusCircleView.backgroundColor = .red
+        } else if !note.id.isEmpty && !note.imageId.isEmpty {
+            statusCircleView.backgroundColor = .green
+        }
     }
     
     func setupConstraints() {
         noteImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(noteImageView)
         noteImageView.constrainTo(top: 0, bottom: 0, of: self)
+        noteImageView.leadingAnchor.constraint(equalTo: leadingAnchor).activate()
+        noteImageView.widthAnchor.constraint(equalTo: noteImageView.heightAnchor).activate()
+        noteImageView.backgroundColor = .black
+        noteImageView.clipsToBounds = true
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)

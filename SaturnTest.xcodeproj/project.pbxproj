@@ -22,6 +22,7 @@
 		C239B246242832910012488F /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B245242832910012488F /* NotesViewModel.swift */; };
 		C239B24824283E620012488F /* NotesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24724283E620012488F /* NotesManager.swift */; };
 		C239B24A24284EF10012488F /* NoteCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24924284EF10012488F /* NoteCreationViewController.swift */; };
+		C239B24C2428641C0012488F /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24B2428641C0012488F /* Threading.swift */; };
 		C289B8D9242709E1003E8040 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C289B8D8242709E1003E8040 /* AppDelegate.swift */; };
 		C289B8DB242709E1003E8040 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C289B8DA242709E1003E8040 /* SceneDelegate.swift */; };
 		C289B8E2242709E4003E8040 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C289B8E1242709E4003E8040 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		C239B245242832910012488F /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		C239B24724283E620012488F /* NotesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesManager.swift; sourceTree = "<group>"; };
 		C239B24924284EF10012488F /* NoteCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreationViewController.swift; sourceTree = "<group>"; };
+		C239B24B2428641C0012488F /* Threading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Threading.swift; sourceTree = "<group>"; };
 		C289B8D5242709E1003E8040 /* SaturnTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaturnTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C289B8D8242709E1003E8040 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C289B8DA242709E1003E8040 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				C239B23B242816130012488F /* NSLayoutConstraint+Extension.swift */,
+				C239B24B2428641C0012488F /* Threading.swift */,
 				C239B2402428215C0012488F /* Tuple.swift */,
 			);
 			path = Helpers;
@@ -310,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C239B24C2428641C0012488F /* Threading.swift in Sources */,
 				C289B8D9242709E1003E8040 /* AppDelegate.swift in Sources */,
 				C22161FD24271F9500886AF1 /* ApplicationManager.swift in Sources */,
 				C22162002427FE3D00886AF1 /* BaseNavigationController.swift in Sources */,
