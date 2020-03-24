@@ -16,6 +16,7 @@ class NoteTableViewCell: UITableViewCell {
     var titleLabel: UILabel
     var statusView: UIView
     var statusCircleView: UIView
+    var spinnerView: UIActivityIndicatorView
 
     static let reuseIdentifier = "NoteTableViewCell"
     
@@ -24,6 +25,7 @@ class NoteTableViewCell: UITableViewCell {
         titleLabel = UILabel()
         statusView = UIView()
         statusCircleView = UIView()
+        spinnerView = UIActivityIndicatorView(style: .medium)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
     }
@@ -36,6 +38,15 @@ class NoteTableViewCell: UITableViewCell {
         //  however if it was added in the DB, the local ID will be empty so it will load from the remote image ID
         //
         noteImageView.image = SDImageCache.shared.imageFromCache(forKey: note.imageLocalId.isEmpty ? note.imageId : note.imageLocalId)
+        
+        if note.isAdding {
+            spinnerView.isHidden = false
+            spinnerView.startAnimating()
+            return
+        } else {
+            spinnerView.stopAnimating()
+            spinnerView.isHidden = true
+        }
         
         if note.id == 0 {
             statusCircleView.backgroundColor = .red
@@ -63,17 +74,26 @@ class NoteTableViewCell: UITableViewCell {
         statusView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).activate()
         statusView.constrainTo(top: 0, bottom: 0, of: self)
         statusView.widthAnchor.constraint(equalTo: statusView.heightAnchor).activate()
+        statusView.backgroundColor = .lightGray
         
         statusCircleView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(statusCircleView)
         statusCircleView.centerIn(view: statusView)
         statusCircleView.constrainTo(size: 20)
+        statusCircleView.layer.cornerRadius = 10
+        
+        spinnerView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(spinnerView)
+        spinnerView.centerIn(view: statusView)
+        spinnerView.tintColor = .white
     }
     
-//    override func prepareForReuse() {
-//        noteImageView.image = nil
-//        titleLabel.text = ""
-//    }
+    override func prepareForReuse() {
+        noteImageView.image = nil
+        titleLabel.text = ""
+        spinnerView.stopAnimating()
+        spinnerView.isHidden = true
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

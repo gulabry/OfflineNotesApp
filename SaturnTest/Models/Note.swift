@@ -15,7 +15,7 @@ public class Note: Object {
     @objc dynamic var imageId = ""
     @objc dynamic var imageLocalId = ""
     @objc dynamic var body = ""
-    //@objc dynamic var isAdding = false
+    @objc dynamic var isAdding = false
 }
 
 public extension Note {
@@ -25,6 +25,15 @@ public extension Note {
     
     var isSynced: Bool {
         return isImageSynced && id != 0
+    }
+    
+    func stopAdding() {
+        Threading.main {
+            let realm = try! Realm()
+            try! realm.write {
+                self.isAdding = false
+            }
+        }
     }
 }
 

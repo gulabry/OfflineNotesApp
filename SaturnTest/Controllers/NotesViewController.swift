@@ -65,16 +65,19 @@ extension NotesViewController: UITableViewDelegate {
         // retry upload if needed
         let note = dataSource.note(for: indexPath)
         notesManager.retryUploadingNote(note)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension NotesViewController: NoteCreationDelegate {
     public func save(note: Note, image: UIImage) {
-        //  add note locally
         
         notesManager.save(note: note, image: image)
         
         Threading.main {
+            //  while model is updating server side,
+            //  adding here
+            //
             self.dataSource.add(note)
             self.tableView.reloadData()
         }

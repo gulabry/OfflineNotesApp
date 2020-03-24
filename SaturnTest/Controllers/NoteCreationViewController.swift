@@ -89,7 +89,7 @@ public class NoteCreationViewController: BaseController {
         note.body = body
         note.localId = UUID().uuidString
         note.imageLocalId = note.localId
-        //note.isAdding = true
+        note.isAdding = true
         
         delegate?.save(note: note, image: image)
         dismiss(animated: true, completion: nil)

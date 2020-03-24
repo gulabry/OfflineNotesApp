@@ -51,6 +51,8 @@ public final class NotesManager {
                 self?.addRemote(note: note, image: image)
             } else {
                 print("note failed to add locally")
+                note.stopAdding()
+                self?.delegate?.didUpload(note: note)
             }
         }
     }
@@ -67,6 +69,9 @@ public final class NotesManager {
         //  first adding image to note
         //
         attemptUploadImage(image, to: note) { [weak self] success in
+            
+            note.stopAdding()
+
             if success {
                 //  update modal and status
                 //  note has been uploaded
@@ -74,17 +79,20 @@ public final class NotesManager {
                 
                 Threading.main {
                     self?.attemptUploadNote(note) { success in
+
                         if success {
                             print("added note remotely")
                             self?.delegate?.didUpload(note: note)
                         } else {
                             self?.offlineManager.addToRetryQueue(note: note)
+                            self?.delegate?.didUpload(note: note)
                         }
                     }
                 }
                 
             } else {
                 print("failed to add image remotely, requeuing")
+                self?.delegate?.didUpload(note: note)
                 self?.offlineManager.addToRetryQueue(note: note)
             }
         }

@@ -35,7 +35,7 @@ public class NotesDataSource: NSObject, UITableViewDataSource {
         //  update spinner until added
         let realm = try! Realm()
         try! realm.write {
-            //note.isAdding = true
+            note.isAdding = true
         }
         self.notes.insert(note, at: 0)
     }
