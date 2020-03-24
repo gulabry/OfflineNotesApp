@@ -22,13 +22,14 @@ public final class NotesViewController: BaseController {
         
     init(manager: NotesManager) {
         notesManager = manager
-        dataSource = .init(notes: manager.notes)
+        dataSource = .init(notes: [Note]())
         tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: NoteTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
+        tableView.rowHeight = 90
         super.init()
         tableView.delegate = self
-        
+        notesManager.delegate = self
         setupConstraints()
         addActions()
     }
@@ -61,9 +62,9 @@ public final class NotesViewController: BaseController {
 
 extension NotesViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let note = dataSource.note(for: indexPath)
         // retry upload if needed
+        let note = dataSource.note(for: indexPath)
+        notesManager.retryUploadingNote(note)
     }
 }
 
@@ -84,9 +85,16 @@ extension NotesViewController: NoteCreationDelegate {
 
 extension NotesViewController: NotesManagerDelegate {
     
-    public func notesDidUpdate(notes: [Note]) {
+    public func didUpload(note: Note) {
         Threading.main {
-            self.dataSource.update(notes)
+            self.dataSource.updateNote(note)
+            self.tableView.reloadData()
+        }
+    }
+    
+    public func didUpdate(notes: [Note]) {
+        Threading.main {
+            self.dataSource.replaceAll(notes)
             self.tableView.reloadData()
         }
     }

@@ -16,8 +16,7 @@ fileprivate var FailedUploadKey = "kFailedUploads"
 
 public final class OfflineManager {
     
-    private let realm: Realm
-    private let reachability = NetworkReachabilityManager(host: "www.google.com")
+    public var realmQueue = DispatchQueue.main
     
     private var failedUploads: [NoteLocalID] {
         get { return UserDefaults.standard.value(forKey: FailedUploadKey) as? [String] ?? [String]() }
@@ -25,21 +24,24 @@ public final class OfflineManager {
     }
     
     init() {
-        do {
-            try self.realm = Realm()
-        } catch let error as NSError {
-            fatalError(error.debugDescription)
+        
+        realmQueue.async {
+            
+            let config = Realm.Configuration(
+                schemaVersion: 1,
+                migrationBlock: { migration, oldSchemaVersion in
+                })
+
+            Realm.Configuration.defaultConfiguration = config
+            _ = try! Realm()
+            print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
-        registerNetworkChanges()
     }
     
-    public func loadSavedNotes() -> [Note] {
-        return Array(realm.objects(Note.self))
-    }
-    
-    func registerNetworkChanges() {
-        reachability?.startListening { status in
-            print("Network Status Changed: \(status)")
+    public func loadSavedNotes(completion: @escaping ([Note])->()) {
+        realmQueue.async {
+            let realm = try! Realm()
+            completion(Array(realm.objects(Note.self)))
         }
     }
     
@@ -48,34 +50,47 @@ public final class OfflineManager {
     //
     public func addLocal(note: Note, image: UIImage, completion: @escaping (Bool) -> ()) {
         
-        let scaledDownImage = UIImage(data: image.jpegData(compressionQuality: 0.3)!)
-
-        SDImageCache.shared.store(scaledDownImage,
-                                  forKey: note.localId.isEmpty ? note.imageId : note.localId,
-                                  toDisk: true) { [weak self] in
-            
-            guard let self = self else { return }
-            do {
-                try self.realm.write {
-                    self.realm.add(note)
-                }
-            } catch let error {
-                print(error)
-                completion(false)
-                return
+        let scaledDownImage = UIImage(data: image.jpegData(compressionQuality: 0.2)!)
+        realmQueue.async {
+            let key = note.localId.isEmpty ? note.imageId : note.localId
+            SDImageCache.shared.store(scaledDownImage,
+                                      forKey: key,
+                                      toDisk: true) { [weak self] in
+                                        self!.realmQueue.async {
+                                            let realm = try! Realm()
+                                            try! realm.write {
+                                                realm.add(note)
+                                            }
+                                        
+                                            completion(true)
+                                        }
             }
-            
-            completion(true)
         }
     }
     
-    public func addRemote(note: Note, image: UIImage) {
-        
+    public func update(note: Note, with remoteNote: NoteUploadResponse) {
+        realmQueue.async {
+            let realm = try! Realm()
+            try! realm.write {
+                note.id = remoteNote.id
+            }
+        }
     }
     
-    private func addRemoteWithHandler(note: Note, image: UIImage, completion: @escaping (Bool) -> ()) {
-        
-        // if fails add note ID to local storage of note local ids to retry (these have local imageIDs)
-        //
+    public func update(note: Note, imageId: String) {
+        realmQueue.async {
+            let realm = try! Realm()
+            try! realm.write {
+                note.imageId = imageId
+            }
+        }
+    }
+    
+    //  Manage Offline Objects and Retry Uploads
+    
+    public func addToRetryQueue(note: Note) {
+        realmQueue.async {
+            self.failedUploads.append(note.localId)
+        }
     }
 }

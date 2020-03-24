@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 public class NotesDataSource: NSObject, UITableViewDataSource {
     
@@ -17,11 +18,25 @@ public class NotesDataSource: NSObject, UITableViewDataSource {
         self.notes = notes
     }
     
-    public func update(_ notes: [Note]) {
+    public func updateNote(_ note: Note) {
+        var updatedNotes = self.notes
+        if let row = self.notes.firstIndex(where: { $0.localId == note.localId }) {
+            updatedNotes[row] = note
+        }
+        self.notes = updatedNotes
+    }
+    
+    public func replaceAll(_ notes: [Note]) {
         self.notes = notes
     }
     
     public func add(_ note: Note) {
+    
+        //  update spinner until added
+        let realm = try! Realm()
+        try! realm.write {
+            //note.isAdding = true
+        }
         self.notes.insert(note, at: 0)
     }
     
@@ -39,17 +54,5 @@ public class NotesDataSource: NSObject, UITableViewDataSource {
         cell.setup(with: notes[indexPath.row])
         
         return cell
-    }
-    
-    public static func mockData() -> [Note] {
-        
-        let note1 = Note()
-        note1.id = UUID().uuidString
-        note1.body = "Test note 1"
-        
-        let note2 = Note()
-        note2.id = UUID().uuidString
-        note2.body = "Test note 2"
-        return [note1, note2]
     }
 }
