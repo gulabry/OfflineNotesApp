@@ -62,10 +62,22 @@ public final class NotesViewController: BaseController {
 
 extension NotesViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         // retry upload if needed
+        //
         let note = dataSource.note(for: indexPath)
+        
+        guard !note.isSynced else {
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
+        }
+        
         notesManager.retryUploadingNote(note)
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        note.startSyncing {
+            self.dataSource.updateNote(note)
+            self.tableView.reloadSections([indexPath.section], with: .fade)
+        }
     }
 }
 
@@ -81,8 +93,6 @@ extension NotesViewController: NoteCreationDelegate {
             self.dataSource.add(note)
             self.tableView.reloadData()
         }
-        //  update view to show loading
-        //  reload and show spinner
     }
 }
 

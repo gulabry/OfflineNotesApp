@@ -10,6 +10,8 @@ import Foundation
 
 public class Threading {
     
+    public static let realmQueue = DispatchQueue.main //DispatchQueue(label: "realm-sync-queue")
+    
     public static func mainAfter(seconds: Double, _ block: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: block)
     }

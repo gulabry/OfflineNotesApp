@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import RealmSwift
+import SDWebImage
 
 public class NotesDataSource: NSObject, UITableViewDataSource {
     
@@ -41,17 +42,50 @@ public class NotesDataSource: NSObject, UITableViewDataSource {
     }
     
     public func note(for indexPath: IndexPath) -> Note {
-        return notes[indexPath.row]
+        return notes[indexPath.section]
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return notes.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.reuseIdentifier, for: indexPath) as? NoteTableViewCell else { fatalError("table view has incorrect cell type") }
         
-        cell.setup(with: notes[indexPath.row])
+        let note = notes[indexPath.section]
+        cell.setup(with: note)
+                
+        let localId = note.localId
+        let imageId = note.imageId
+        let imageURLString = note.imageURLString
+        
+        Threading.inBackground {
+            if let savedImage = SDImageCache.shared.imageFromCache(forKey: imageId) ?? SDImageCache.shared.imageFromCache(forKey: localId) {
+                Threading.main {
+                    if let visableCell = tableView.cellForRow(at: indexPath) as? NoteTableViewCell {
+                        visableCell.noteImageView.image = savedImage
+                    }
+                }
+            } else if let imageURL = URL(string: imageURLString) {
+                
+                SDWebImageDownloader.shared.downloadImage(with: imageURL) { (image, _, error, _) in
+                    Threading.main {
+                        if let visableCell = tableView.cellForRow(at: indexPath) as? NoteTableViewCell {
+                            visableCell.noteImageView.image = image
+                        }
+                    }
+                    guard let image = image else { return }
+                    Threading.inBackground {
+                        let scaledDownImage = UIImage(data: image.jpegData(compressionQuality: 0.1)!)
+                        SDImageCache.shared.store(scaledDownImage, forKey: imageId, toDisk: true, completion: nil)
+                     }
+                }
+            }
+        }
         
         return cell
     }

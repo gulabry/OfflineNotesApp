@@ -9,13 +9,28 @@
 import Foundation
 import UIKit
 import Alamofire
+import RealmSwift
 
 public final class ApplicationManager: NSObject, UIWindowSceneDelegate {
     
     public var window: UIWindow?
     
-    public var notesManager = NotesManager()
+    public lazy var notesManager: NotesManager = {
+        let manager = NotesManager(fetchNotes: isConnected)
+        return manager
+    }()
+    
     private let reachability = NetworkReachabilityManager(host: "www.google.com")
+    private var status: NetworkReachabilityManager.NetworkReachabilityStatus = .unknown
+    
+    public var isConnected: Bool {
+        return status == .reachable(.cellular) || status == .reachable(.ethernetOrWiFi)
+    }
+    
+    private var uploadQueue: OperationQueue {
+        let queue = OperationQueue()
+        return queue
+    }
     
     init(window: UIWindow?) {
         
@@ -31,8 +46,25 @@ public final class ApplicationManager: NSObject, UIWindowSceneDelegate {
     }
 
     func registerNetworkChanges() {
-        reachability?.startListening { status in
-            print("Network Status Changed: \(status)")
+        reachability?.startListening(onUpdatePerforming: { status in
+            self.status = status
+            
+            if self.isConnected {
+                self.retryFailedUploads()
+            }
+        })
+    }
+    
+    //  Manage Offline Objects and Retry Uploads
+    
+    public func retryFailedUploads() {
+        Threading.realmQueue.async {
+            let realm = try! Realm()
+            let notes = Array(realm.objects(Note.self)).filter { $0.id == 0 }
+        
+            for note in notes {
+                self.uploadQueue.addOperation(NoteUploadOperation(note: note, manager: self.notesManager))
+            }
         }
     }
 }

@@ -32,27 +32,22 @@ class NoteTableViewCell: UITableViewCell {
     
     public func setup(with note: Note) {
         
-        titleLabel.text = note.body
+        self.titleLabel.text = note.body
         
-        //  will load image from local id (as it's saved there first)
-        //  however if it was added in the DB, the local ID will be empty so it will load from the remote image ID
-        //
-        noteImageView.image = SDImageCache.shared.imageFromCache(forKey: note.imageLocalId.isEmpty ? note.imageId : note.imageLocalId)
-        
+        let imageID = note.imageId
+        self.noteImageView.image = nil
+
         if note.isAdding {
-            spinnerView.isHidden = false
-            spinnerView.startAnimating()
-            return
+            self.spinnerView.isHidden = false
+            self.spinnerView.startAnimating()
+            self.statusCircleView.isHidden = true
         } else {
-            spinnerView.stopAnimating()
-            spinnerView.isHidden = true
+            self.spinnerView.stopAnimating()
+            self.spinnerView.isHidden = true
+            self.statusCircleView.isHidden = false
         }
         
-        if note.id == 0 {
-            statusCircleView.backgroundColor = .red
-        } else if note.id != 0 && !note.imageId.isEmpty {
-            statusCircleView.backgroundColor = .green
-        }
+        self.statusCircleView.backgroundColor = note.id == 0 ? .red : .green
     }
     
     func setupConstraints() {

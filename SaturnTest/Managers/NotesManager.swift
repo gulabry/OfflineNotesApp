@@ -25,46 +25,49 @@ public final class NotesManager {
     //
     //internal var notes: [Note]
     
-    public init() {
-        
-        offlineManager.loadSavedNotes(completion: { [weak self] (notes) in
-            self?.delegate?.didUpdate(notes: notes)
-        })
+    public init(fetchNotes: Bool) {
+        if fetchNotes {
+            self.fetchNotes { [weak self] notes in
+                guard let notes = notes else { return }
+                self?.delegate?.didUpdate(notes: notes)
+            }
+        } else {
+            offlineManager.loadSavedNotes { [weak self] notes in
+                self?.delegate?.didUpdate(notes: notes)
+            }
+        }
     }
     
-    //  the modals will indicated if they are saved locally or not
-    //  note.id = saved remotely
-    //  note.localId = saved locally
-    //  note.imageId = saved remotely
-    //  note.imageLocalId = saved locally
-    //
     public func save(note: Note, image: UIImage) {
         
         if note.isSynced {
-            print("note is synced with server")
+            print("note is already with server")
+            note.stopAdding()
+            self.delegate?.didUpload(note: note)
             return
         }
         
         offlineManager.addLocal(note: note, image: image) { [weak self] isSavedLocally in
-            if isSavedLocally {
+            guard let self = self else { return }
+            if isSavedLocally && self.offlineManager.isConnected {
                 print("saved locally")
-                self?.addRemote(note: note, image: image)
+                self.addRemote(note: note, image: image)
             } else {
-                print("note failed to add locally")
+                print("note failed to add locally, or is offline")
                 note.stopAdding()
-                self?.delegate?.didUpload(note: note)
+                self.delegate?.didUpload(note: note)
             }
         }
     }
     
     public func retryUploadingNote(_ note: Note) {
-        guard let image = SDImageCache.shared.imageFromCache(forKey: note.imageLocalId) else { return }
+        guard let image = SDImageCache.shared.imageFromCache(forKey: note.localId) else { return }
         save(note: note, image: image)
     }
     
     //  Will attempt to add the image first, then upload the note
     //
-    public func addRemote(note: Note, image: UIImage) {
+    public func addRemote(note: Note, image: UIImage, completion: (() -> ())? = nil) {
         
         //  first adding image to note
         //
@@ -82,18 +85,15 @@ public final class NotesManager {
 
                         if success {
                             print("added note remotely")
-                            self?.delegate?.didUpload(note: note)
-                        } else {
-                            self?.offlineManager.addToRetryQueue(note: note)
-                            self?.delegate?.didUpload(note: note)
                         }
+                        
+                        self?.delegate?.didUpload(note: note)
                     }
                 }
                 
             } else {
                 print("failed to add image remotely, requeuing")
                 self?.delegate?.didUpload(note: note)
-                self?.offlineManager.addToRetryQueue(note: note)
             }
         }
     }
@@ -129,6 +129,49 @@ public final class NotesManager {
             }
         }
     }
+    
+    private func fetchNotes(completion: @escaping ([Note]?) -> ()) {
+        NotesManager.getNotes { response in
+            switch response {
+            case .success(let remoteNotes):
+                self.convertRemoteNotesResponse(remoteNotes) { notes in
+                    completion(notes)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(nil)
+            }
+        }
+    }
+    
+    private func convertRemoteNotesResponse(_ remoteNotes: [NoteUploadResponse], completion: @escaping ([Note]) -> ()) {
+        Threading.realmQueue.async {
+            let realm = try! Realm()
+            let savedNotes = realm.objects(Note.self)
+
+            var newNotes = [Note]()
+            
+            for note in remoteNotes {
+                //  if match does not exist, add new note
+                if Array(savedNotes).filter({ $0.id == note.id }).first == nil {
+                    print("new note added from remote")
+                    let newNote = Note()
+                    newNote.id = note.id
+                    newNote.body = note.title
+                    if let image = note.image {
+                        newNote.imageId = image.id
+                        newNote.imageURLString = image.urls.small ?? ""
+                    }
+                    newNotes.append(newNote)
+                }
+            }
+            
+            try! realm.write {
+                realm.add(newNotes)
+                completion(Array(realm.objects(Note.self)))
+            }
+        }
+    }
 }
 
 //  API functions
@@ -155,6 +198,16 @@ extension NotesManager {
         }, with: request).responseDecodable(of: ImageUploadResponse.self,
                                             queue: DispatchQueue.global(qos: .utility),
                                             decoder: JSONDecoder()) { response in
+            completion(response.result)
+        }
+    }
+    
+    static func getNotes(completion: @escaping (Result<[NoteUploadResponse], AFError>) -> ()) {
+        guard let url = URL(string: "https://env-develop.saturn.engineering/api/v2/test-notes") else { return }
+    
+        AF.request(url).responseDecodable(of: [NoteUploadResponse].self,
+                                          queue: DispatchQueue.global(qos: .utility),
+                                          decoder: JSONDecoder()) { response in
             completion(response.result)
         }
     }

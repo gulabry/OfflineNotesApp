@@ -19,7 +19,6 @@
 		C239B23F24281C330012488F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B23E24281C330012488F /* Note.swift */; };
 		C239B2412428215C0012488F /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B2402428215C0012488F /* Tuple.swift */; };
 		C239B24424282A030012488F /* NotesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24324282A030012488F /* NotesDataSource.swift */; };
-		C239B246242832910012488F /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B245242832910012488F /* NotesViewModel.swift */; };
 		C239B24824283E620012488F /* NotesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24724283E620012488F /* NotesManager.swift */; };
 		C239B24A24284EF10012488F /* NoteCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24924284EF10012488F /* NoteCreationViewController.swift */; };
 		C239B24C2428641C0012488F /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239B24B2428641C0012488F /* Threading.swift */; };
@@ -28,6 +27,9 @@
 		C289B8D9242709E1003E8040 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C289B8D8242709E1003E8040 /* AppDelegate.swift */; };
 		C289B8DB242709E1003E8040 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C289B8DA242709E1003E8040 /* SceneDelegate.swift */; };
 		C289B8E2242709E4003E8040 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C289B8E1242709E4003E8040 /* Assets.xcassets */; };
+		C2D64A3D242B1ECD008F6F72 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D64A3C242B1ECD008F6F72 /* AsyncOperation.swift */; };
+		C2D64A3F242B1F36008F6F72 /* NoteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D64A3E242B1F36008F6F72 /* NoteUploadOperation.swift */; };
+		C2D64A41242B3B66008F6F72 /* ImageHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D64A40242B3B66008F6F72 /* ImageHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +46,6 @@
 		C239B23E24281C330012488F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		C239B2402428215C0012488F /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
 		C239B24324282A030012488F /* NotesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDataSource.swift; sourceTree = "<group>"; };
-		C239B245242832910012488F /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		C239B24724283E620012488F /* NotesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesManager.swift; sourceTree = "<group>"; };
 		C239B24924284EF10012488F /* NoteCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreationViewController.swift; sourceTree = "<group>"; };
 		C239B24B2428641C0012488F /* Threading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Threading.swift; sourceTree = "<group>"; };
@@ -55,6 +56,9 @@
 		C289B8DA242709E1003E8040 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C289B8E1242709E4003E8040 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C289B8E6242709E4003E8040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2D64A3C242B1ECD008F6F72 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		C2D64A3E242B1F36008F6F72 /* NoteUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUploadOperation.swift; sourceTree = "<group>"; };
+		C2D64A40242B3B66008F6F72 /* ImageHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelpers.swift; sourceTree = "<group>"; };
 		E4EDC4917DD132C99ECF56C8 /* Pods-SaturnTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaturnTest.debug.xcconfig"; path = "Target Support Files/Pods-SaturnTest/Pods-SaturnTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,20 +137,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		C239B237242813320012488F /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				C239B245242832910012488F /* NotesViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		C239B23A242815F20012488F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				C239B23B242816130012488F /* NSLayoutConstraint+Extension.swift */,
 				C239B24B2428641C0012488F /* Threading.swift */,
 				C239B2402428215C0012488F /* Tuple.swift */,
+				C2D64A40242B3B66008F6F72 /* ImageHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -196,13 +193,22 @@
 				C239B242242829EC0012488F /* DataSources */,
 				C239B236242813280012488F /* View */,
 				C239B23A242815F20012488F /* Helpers */,
+				C2D64A3B242B1EBD008F6F72 /* Operation */,
 				C239B23D24281C260012488F /* Models */,
-				C239B237242813320012488F /* ViewModels */,
 				C289B8E6242709E4003E8040 /* Info.plist */,
 				C289B8E1242709E4003E8040 /* Assets.xcassets */,
 				C22162092428111600886AF1 /* LaunchScreen.storyboard */,
 			);
 			path = SaturnTest;
+			sourceTree = "<group>";
+		};
+		C2D64A3B242B1EBD008F6F72 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				C2D64A3C242B1ECD008F6F72 /* AsyncOperation.swift */,
+				C2D64A3E242B1F36008F6F72 /* NoteUploadOperation.swift */,
+			);
+			path = Operation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,12 +308,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C239B24C2428641C0012488F /* Threading.swift in Sources */,
+				C2D64A3F242B1F36008F6F72 /* NoteUploadOperation.swift in Sources */,
 				C289B8D9242709E1003E8040 /* AppDelegate.swift in Sources */,
 				C239B250242983220012488F /* ImageUploadResponse.swift in Sources */,
 				C22161FD24271F9500886AF1 /* ApplicationManager.swift in Sources */,
 				C22162002427FE3D00886AF1 /* BaseNavigationController.swift in Sources */,
 				C239B24824283E620012488F /* NotesManager.swift in Sources */,
-				C239B246242832910012488F /* NotesViewModel.swift in Sources */,
 				C239B23C242816130012488F /* NSLayoutConstraint+Extension.swift in Sources */,
 				C239B239242813500012488F /* NoteTableViewCell.swift in Sources */,
 				C239B23F24281C330012488F /* Note.swift in Sources */,
@@ -318,7 +324,9 @@
 				C289B8DB242709E1003E8040 /* SceneDelegate.swift in Sources */,
 				C239B252242989030012488F /* NoteUploadResponse.swift in Sources */,
 				C239B24A24284EF10012488F /* NoteCreationViewController.swift in Sources */,
+				C2D64A3D242B1ECD008F6F72 /* AsyncOperation.swift in Sources */,
 				C22162022427FE5600886AF1 /* BaseViewController.swift in Sources */,
+				C2D64A41242B3B66008F6F72 /* ImageHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

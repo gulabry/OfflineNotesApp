@@ -91,7 +91,10 @@ public class NoteCreationViewController: BaseController {
         note.imageLocalId = note.localId
         note.isAdding = true
         
-        delegate?.save(note: note, image: image)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
+            self.delegate?.save(note: note, image: image)
+        }
+        
         dismiss(animated: true, completion: nil)
     }
     

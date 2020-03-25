@@ -12,7 +12,7 @@ public struct NoteUploadResponse: Decodable {
     
     var id: Int
     var title: String
-    var image: NoteUploadImageResponse
+    var image: NoteUploadImageResponse?
     
     public struct NoteUploadImageResponse: Decodable {
         
