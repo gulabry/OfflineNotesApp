@@ -16,7 +16,7 @@ public final class ApplicationManager: NSObject, UIWindowSceneDelegate {
     public var window: UIWindow?
     
     public lazy var notesManager: NotesManager = {
-        let manager = NotesManager(fetchNotes: isConnected)
+        let manager = NotesManager(fetchNotes: true)
         return manager
     }()
     
